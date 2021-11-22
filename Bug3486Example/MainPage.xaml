@@ -1,0 +1,41 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Bug3486Example.ViewModels"
+    x:Class="Bug3486Example.MainPage"
+    BackgroundColor="{DynamicResource SecondaryColor}">
+
+    <Grid RowSpacing="25" RowDefinitions="Auto,Auto,Auto,Auto,*"
+            Padding="{OnPlatform iOS='30,60,30,30', Default='30'}">
+
+        <Label 
+            Text="Bug 3486"
+            Grid.Row="0"
+            SemanticProperties.HeadingLevel="Level1"
+            FontSize="32"
+            HorizontalOptions="Center" />
+
+        <ListView Grid.Row="2"
+            x:Name="UriReport"
+            ItemsSource="{Binding Items}">
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="vm:SummaryLineViewModel">
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <MenuItem Command="{Binding OnCopyAddress}" CommandParameter="{Binding Address}" Text="Copy address"/>
+                        </ViewCell.ContextActions>
+                        <Grid ColumnDefinitions="*, *">
+                            <Label Grid.Column="0" Text="{Binding Address}" Style="{DynamicResource ResultsRow}" />
+                            <Label Grid.Column="2" Text="{Binding Name}" Style="{DynamicResource ResultsRow}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+        
+        
+
+    </Grid>
+
+</ContentPage>
